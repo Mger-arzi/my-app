@@ -12,7 +12,6 @@ export type FilterValuesType = "all" | "active" | "completed";
 
 
 
-
 function App() {
 
     let [filterFri, setFilterFri] = useState  <Array<TaskType>> ([
@@ -22,45 +21,57 @@ function App() {
         {id: 4, title: "Rest API", isDone: false},
         {id: 5, title: "GraphQL", isDone: false},
     ]);
+    
 
-    function removeTask(id: number) {
-        let filteredTasks = filterFri.filter(t => t.id != id);
-        setFilterFri(filteredTasks);
-    }
-
+    
+     
     function removeAllTasks() {
         setFilterFri([])
     } 
+     function firstFri () {
+        filterFri = filterFri.filter(t => t.id <= 3)
+        setFilterFri(filterFri)
+    }
+
 
   
-let [filter, setFilter] = useState<FilterValuesType>("all");
 
-let tasksForTodolist = filterFri;
+
+
+function removeTask(id: number) {
+    let filteredTasks = filterFri.filter(t => t.id != id);
+    setFilterFri(filteredTasks);
+}
+   
+
+
+
+
+    let [filter, setFilter] = useState<FilterValuesType>("all");
 
 if (filter === "active") {
-    tasksForTodolist = filterFri.filter(t => t.isDone === false);
+    filterFri = filterFri.filter(t => t.isDone === false);
 }
 if (filter === "completed") {
-    tasksForTodolist = filterFri.filter(t => t.isDone === true);
+    filterFri = filterFri.filter(t => t.isDone === true);
 }
 
 function changeFilter(value: FilterValuesType) {
     setFilter(value);
 }
 
-    function firstFri () {
-        filterFri = filterFri.filter(t => t.id <= 3)
-        setFilterFri(filterFri)
-    }
+   
 
     return (
         <div className="App">
-                <Todolist title="What to learn"
-                        tasks={tasksForTodolist}
-                        removeTask ={removeTask}
-                        removeAllTasks={removeAllTasks}
-                        firstFri={firstFri}
-                        changeFilter ={changeFilter}/>
+                <Todolist   tasks={filterFri} 
+                            title="What to learn"
+                            changeFilter={changeFilter}
+                            firstFri={firstFri}
+                            removeAllTasks={removeAllTasks}
+                            removeTask={removeTask}
+                            />
+                        
                         
         </div>
     );

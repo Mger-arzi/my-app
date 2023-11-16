@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {FilterValuesType} from './App';
 
 export type TaskType = {
@@ -16,7 +16,15 @@ type PropsType = {
     firstFri: () => void
 }
 
+
+
+
+
+
 export function Todolist(props: PropsType) {
+
+
+
     return <div>
         <h3>{props.title}</h3>
         <div>
@@ -36,7 +44,7 @@ export function Todolist(props: PropsType) {
             <button onClick={ ()=> {props.removeAllTasks() }}> 
                 УДАЛИТЬ ВСЕ ЗАДАЧИ 
             </button>
-            <button onClick={ () => { props.changeFilter("all") } }>
+            <button onClick={ () => {props. changeFilter("all") } }>
                 All
             </button>
             <button onClick={ () => { props.changeFilter("active")} }>
